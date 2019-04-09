@@ -35,7 +35,25 @@ namespace WinFormsCourses
 
         private void buttonUniversitiesDelete_Click(object sender, EventArgs e)
         {
-            this.universitiesBindingSource.RemoveCurrent();
+            try
+            {
+                int id = (int)dataGridViewUniversities.CurrentRow.Cells["uN_IDDataGridViewTextBoxColumn"].Value;
+
+                global::System.Nullable<int> un_count = queriesTableAdapter1.SQCountUN_IDinCourses(id);
+
+                if (un_count == 0)
+                {
+                    this.universitiesBindingSource.RemoveCurrent();
+                }
+                else
+                {
+                    MessageBox.Show("Неможливо видалити! До університету прив'язані курси!", "Помилка видалення");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Помилка видалення інформації про університет", "Видалення інформації про університет");
+            }
         }
 
         private void buttonCategories_Click(object sender, EventArgs e)
@@ -45,7 +63,25 @@ namespace WinFormsCourses
 
         private void buttonCategoriesDelete_Click(object sender, EventArgs e)
         {
-            this.categoriesBindingSource.RemoveCurrent();
+            try
+            {
+                int id = (int)dataGridViewCategories.CurrentRow.Cells["cA_IDDataGridViewTextBoxColumn"].Value;
+
+                global::System.Nullable<int> ca_count = queriesTableAdapter1.SQCountCA_IDinCourses(id);
+
+                if (ca_count == 0)
+                {
+                    this.categoriesBindingSource.RemoveCurrent();
+                }
+                else
+                {
+                    MessageBox.Show("Неможливо видалити! До категорії прив'язані курси!", "Помилка видалення");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Помилка видалення інформації про категорію", "Видалення інформації про категорію");
+            }
         }
 
         private void buttonAuthors_Click(object sender, EventArgs e)
@@ -55,7 +91,25 @@ namespace WinFormsCourses
 
         private void buttonAuthorsDelete_Click(object sender, EventArgs e)
         {
-            this.authorsBindingSource.RemoveCurrent();
+            try
+            {
+                int id = (int)dataGridViewAuthors.CurrentRow.Cells["aU_IDDataGridViewTextBoxColumn"].Value;
+
+                global::System.Nullable<int> au_count = queriesTableAdapter1.SQCountAU_IDinCourses(id);
+
+                if (au_count == 0)
+                {
+                    this.authorsBindingSource.RemoveCurrent();
+                }
+                else
+                {
+                    MessageBox.Show("Неможливо видалити! До автора прив'язані курси!", "Помилка видалення");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Помилка видалення інформації про автора", "Видалення інформації про автора");
+            }
         }
     }
 }
